@@ -278,6 +278,8 @@ function montarMasonry(grid) {
     // Cada foto vai para a coluna mais curta (altura proporcional à imagem)
     fotos.forEach((img, i) => {
       const menor = alturas.indexOf(Math.min(...alturas));
+      // reserva a altura correta ANTES da imagem baixar (evita buraco no carregamento)
+      img.style.aspectRatio = (1 / grid._proporcoes[i]).toFixed(4); // largura / altura
       if (img.dataset.src) img.src = img.dataset.src;
       img.classList.add('loaded');
       colunas[menor].appendChild(img);
